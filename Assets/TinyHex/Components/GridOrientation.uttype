@@ -1,0 +1,29 @@
+﻿[{
+    "$TypeId": 3,
+    "Id": "8b258179b538417f99d99f60b68a5236",
+    "Name": "GridOrientation",
+    "ExportFlags": 0,
+    "Unlisted": false,
+    "Visibility": 0,
+    "TypeCode": "Enum",
+    "BaseType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+    "Fields": [{
+        "Id": "4284927ac7e34a5688358f33833a5d8e",
+        "Name": "FlatTopped",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+        "Array": false,
+        "Visibility": 0
+    }, {
+        "Id": "053c4fc1380e4e4ba6af6ef952e0a350",
+        "Name": "PointyTopped",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+        "Array": false,
+        "Visibility": 0
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "8b258179b538417f99d99f60b68a5236", "Name": "GridOrientation" },
+        "Properties": {
+            "PointyTopped": 1
+        }
+    }
+}]

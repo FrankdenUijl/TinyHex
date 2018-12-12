@@ -1,0 +1,177 @@
+﻿[{
+    "$TypeId": 4,
+    "Id": "dbf7e21a5633438d87d2986251d2c6fd",
+    "Name": "Kickoff",
+    "ExportFlags": 0,
+    "SerializedVersion": 0,
+    "Entities": [
+        { "$TypeId": 9, "Id": "33cf07a1130b4fd0a910432c9b1ed135", "Name": "Camera" },
+        { "$TypeId": 9, "Id": "0b3d930ba26d45029920383445eb38ea", "Name": "Grid" },
+        { "$TypeId": 9, "Id": "6785b28ad3104bcd9c355cbe51908b09", "Name": "Tile" },
+        { "$TypeId": 9, "Id": "470eacfb29d94f7b98cf87c35e828513", "Name": "NormalIcon" },
+        { "$TypeId": 9, "Id": "f86549b2b9be4e609353dba6f5880bec", "Name": "WallIcon" },
+        { "$TypeId": 9, "Id": "8663bd90d96e44ddab11106f6c60705e", "Name": "PathIcon" },
+        { "$TypeId": 9, "Id": "e5a7d49f93c542e4a47a1a879047bf6d", "Name": "NodeIcon" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "33cf07a1130b4fd0a910432c9b1ed135",
+    "Name": "Camera",
+    "Enabled": true,
+    "Static": false,
+    "Layer": 0,
+    "Components": [{
+        "Type": { "Id": "c895dbe72eb46ecb10d589d320151758", "Name": "TransformNode" }
+    }, {
+        "Type": { "Id": "12692383f3fef3bb74c209888c5b0939", "Name": "Camera2D" },
+        "Properties": {
+            "backgroundColor": {
+                "Type": { "Id": "2a90a1633d6dc16cd37cdfaca7b93cea", "Name": "Color" },
+                "Properties": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                }
+            },
+            "clearFlags": {
+                "$TypeId": 8,
+                "Type": { "Id": "76a06ddd38e99125d930e77c6a287872", "Name": "CameraClearFlags" },
+                "Id": "9faedc246f34513076701ef66b5ad74f",
+                "Name": "SolidColor",
+                "Value": 1
+            },
+            "depth": -1
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "0b3d930ba26d45029920383445eb38ea",
+    "Name": "Grid",
+    "Enabled": true,
+    "Static": false,
+    "Layer": 0,
+    "Components": [{
+        "Type": { "Id": "c895dbe72eb46ecb10d589d320151758", "Name": "TransformNode" }
+    }, {
+        "Type": { "Id": "70449d66178e0d9f66795c24f0fbbdfc", "Name": "TransformLocalPosition" }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "6785b28ad3104bcd9c355cbe51908b09",
+    "Name": "Tile",
+    "Enabled": true,
+    "Static": false,
+    "Layer": 0,
+    "Components": [{
+        "Type": { "Id": "c895dbe72eb46ecb10d589d320151758", "Name": "TransformNode" },
+        "Properties": {
+            "parent": { "$TypeId": 9, "Id": "0b3d930ba26d45029920383445eb38ea", "Name": "Grid" }
+        }
+    }, {
+        "Type": { "Id": "70449d66178e0d9f66795c24f0fbbdfc", "Name": "TransformLocalPosition" }
+    }, {
+        "Type": { "Id": "3f9a8698f1184496a3515d27b7acb499", "Name": "Tile" }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "470eacfb29d94f7b98cf87c35e828513",
+    "Name": "NormalIcon",
+    "Enabled": true,
+    "Static": false,
+    "Layer": 0,
+    "Components": [{
+        "Type": { "Id": "c895dbe72eb46ecb10d589d320151758", "Name": "TransformNode" },
+        "Properties": {
+            "parent": { "$TypeId": 9, "Id": "6785b28ad3104bcd9c355cbe51908b09", "Name": "Tile" }
+        }
+    }, {
+        "Type": { "Id": "70449d66178e0d9f66795c24f0fbbdfc", "Name": "TransformLocalPosition" }
+    }, {
+        "Type": { "Id": "617fd26299c944d58b61164e0c9c9353", "Name": "Text2DRenderer" },
+        "Properties": {
+            "style": { "$TypeId": 9, "Id": "470eacfb29d94f7b98cf87c35e828513", "Name": "NormalIcon" },
+            "text": ""
+        }
+    }, {
+        "Type": { "Id": "ced0260f12f72499bae7fea4e1df92b7", "Name": "Text2DStyle" }
+    }, {
+        "Type": { "Id": "0481d22c456081a992e7c7ee42da6c19", "Name": "Text2DStyleBitmapFont" },
+        "Properties": {
+            "font": { "$TypeId": 10, "Guid": "91c96a6d4591be644b1e07f10108d3e6", "FileId": 11400000, "Type": 2 }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "f86549b2b9be4e609353dba6f5880bec",
+    "Name": "WallIcon",
+    "Enabled": true,
+    "Static": false,
+    "Layer": 0,
+    "Components": [{
+        "Type": { "Id": "c895dbe72eb46ecb10d589d320151758", "Name": "TransformNode" },
+        "Properties": {
+            "parent": { "$TypeId": 9, "Id": "6785b28ad3104bcd9c355cbe51908b09", "Name": "Tile" }
+        }
+    }, {
+        "Type": { "Id": "70449d66178e0d9f66795c24f0fbbdfc", "Name": "TransformLocalPosition" }
+    }, {
+        "Type": { "Id": "617fd26299c944d58b61164e0c9c9353", "Name": "Text2DRenderer" },
+        "Properties": {
+            "style": { "$TypeId": 9, "Id": "f86549b2b9be4e609353dba6f5880bec", "Name": "WallIcon" },
+            "text": ""
+        }
+    }, {
+        "Type": { "Id": "ced0260f12f72499bae7fea4e1df92b7", "Name": "Text2DStyle" }
+    }, {
+        "Type": { "Id": "0481d22c456081a992e7c7ee42da6c19", "Name": "Text2DStyleBitmapFont" },
+        "Properties": {
+            "font": { "$TypeId": 10, "Guid": "4c82f00df5bc74d4ea4b780b8279b0a4", "FileId": 11400000, "Type": 2 }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "8663bd90d96e44ddab11106f6c60705e",
+    "Name": "PathIcon",
+    "Enabled": true,
+    "Static": false,
+    "Layer": 0,
+    "Components": [{
+        "Type": { "Id": "c895dbe72eb46ecb10d589d320151758", "Name": "TransformNode" },
+        "Properties": {
+            "parent": { "$TypeId": 9, "Id": "6785b28ad3104bcd9c355cbe51908b09", "Name": "Tile" }
+        }
+    }, {
+        "Type": { "Id": "70449d66178e0d9f66795c24f0fbbdfc", "Name": "TransformLocalPosition" }
+    }, {
+        "Type": { "Id": "2266a95f5d16ca1ddde710d7c047ba69", "Name": "TransformLocalRotation" }
+    }, {
+        "Type": { "Id": "f11fe490eefc969bbc3fde5eab5ccd1e", "Name": "TransformLocalScale" }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "e5a7d49f93c542e4a47a1a879047bf6d",
+    "Name": "NodeIcon",
+    "Enabled": true,
+    "Static": false,
+    "Layer": 0,
+    "Components": [{
+        "Type": { "Id": "c895dbe72eb46ecb10d589d320151758", "Name": "TransformNode" },
+        "Properties": {
+            "parent": { "$TypeId": 9, "Id": "6785b28ad3104bcd9c355cbe51908b09", "Name": "Tile" }
+        }
+    }, {
+        "Type": { "Id": "70449d66178e0d9f66795c24f0fbbdfc", "Name": "TransformLocalPosition" }
+    }, {
+        "Type": { "Id": "2266a95f5d16ca1ddde710d7c047ba69", "Name": "TransformLocalRotation" }
+    }, {
+        "Type": { "Id": "f11fe490eefc969bbc3fde5eab5ccd1e", "Name": "TransformLocalScale" }
+    }]
+}]

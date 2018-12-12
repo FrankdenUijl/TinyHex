@@ -1,0 +1,46 @@
+﻿[{
+    "$TypeId": 3,
+    "Id": "aec3e9f673e7402ba2838a576bc5b054",
+    "Name": "Grid",
+    "ExportFlags": 0,
+    "Unlisted": false,
+    "Visibility": 0,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "6b105e2f781f43c09534833d7c4a7b5c",
+        "Name": "Columns",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+        "Array": false,
+        "Visibility": 0
+    }, {
+        "Id": "3daf3485d4c74e09b16ec2fdd6986659",
+        "Name": "Rows",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+        "Array": false,
+        "Visibility": 0
+    }, {
+        "Id": "094b419d1d5e4f108b50b906821c7baf",
+        "Name": "Orientation",
+        "FieldType": { "Id": "8b258179b538417f99d99f60b68a5236", "Name": "GridOrientation" },
+        "Array": false,
+        "Visibility": 0
+    }, {
+        "Id": "e0a955eb851e48ba8eb95d833d74c9a3",
+        "Name": "Changed",
+        "FieldType": { "Id": "2b477f505af74487b7092b5617d88d3f", "Name": "Boolean" },
+        "Array": false,
+        "Visibility": 1
+    }, {
+        "Id": "8ca057aeccaf4f42a96c134545adc612",
+        "Name": "Start",
+        "FieldType": { "Id": "3155b86c6728444aa84d581d83e59954", "Name": "Coordiantes" },
+        "Array": false,
+        "Visibility": 0
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "aec3e9f673e7402ba2838a576bc5b054", "Name": "Grid" },
+        "Properties": {
+            "Changed": true
+        }
+    }
+}]
