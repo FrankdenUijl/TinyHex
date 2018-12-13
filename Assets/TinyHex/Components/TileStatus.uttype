@@ -1,0 +1,43 @@
+﻿[{
+    "$TypeId": 3,
+    "Id": "25bc65e01c414d4299bcbcb6588394e9",
+    "Name": "TileStatus",
+    "ExportFlags": 0,
+    "Unlisted": false,
+    "Visibility": 0,
+    "TypeCode": "Enum",
+    "BaseType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+    "Fields": [{
+        "Id": "267f08300078423fb4ca68b354eaf98f",
+        "Name": "Normal",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+        "Array": false,
+        "Visibility": 0
+    }, {
+        "Id": "b8abf3f990cb4c13a5a4a862bec6fd2a",
+        "Name": "Wall",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+        "Array": false,
+        "Visibility": 0
+    }, {
+        "Id": "39b650d20d6741d4a7140f62de81d263",
+        "Name": "Path",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+        "Array": false,
+        "Visibility": 0
+    }, {
+        "Id": "45e3d62d10ba4a47817eb267b6c0a7f5",
+        "Name": "Node",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
+        "Array": false,
+        "Visibility": 0
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "25bc65e01c414d4299bcbcb6588394e9", "Name": "TileType" },
+        "Properties": {
+            "Wall": 1,
+            "Path": 2,
+            "Node": 3
+        }
+    }
+}]

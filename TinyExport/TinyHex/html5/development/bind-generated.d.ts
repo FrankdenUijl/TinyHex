@@ -107,6 +107,21 @@ declare namespace game{
         static _tempHeapPtr(v: Tile): number;
         static _dtorFn(v: Tile): void;
     }
+    class TileIcons extends ut.Component {
+        constructor();
+        Normal: ut.Entity;
+        Wall: ut.Entity;
+        Path: ut.Entity;
+        Node: ut.Entity;
+        static readonly cid: number;
+        static readonly _view: any;
+        static readonly _isSharedComp: boolean;
+        static _size: number;
+        static _fromPtr(p: number, v?: TileIcons): TileIcons;
+        static _toPtr(p: number, v: TileIcons): void;
+        static _tempHeapPtr(v: TileIcons): number;
+        static _dtorFn(v: TileIcons): void;
+    }
     class Coordinate {
         Row: number;
         Column: number;
@@ -118,6 +133,8 @@ declare namespace game{
     enum GridOrientation {
         FlatTopped = 0,
         PointyTopped = 1,
+    }
+    enum TileType {
     }
 }
 declare namespace ut{

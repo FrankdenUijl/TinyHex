@@ -1,0 +1,37 @@
+﻿[{
+    "$TypeId": 3,
+    "Id": "cb6ed1e1baab4753b824be22e7d449ec",
+    "Name": "TileIcons",
+    "ExportFlags": 0,
+    "Unlisted": false,
+    "Visibility": 0,
+    "TypeCode": "Component",
+    "Fields": [{
+        "Id": "4ef4a3f1a7ed45ad96be0af97b46649c",
+        "Name": "Normal",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
+        "Array": false,
+        "Visibility": 0
+    }, {
+        "Id": "a90874150f954c7a9df17cd63510e4c3",
+        "Name": "Wall",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
+        "Array": false,
+        "Visibility": 0
+    }, {
+        "Id": "a335223526c14a9fae292ac9ef85fc33",
+        "Name": "Path",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
+        "Array": false,
+        "Visibility": 0
+    }, {
+        "Id": "3920e6c43b474000b4664f1c4d0f3baa",
+        "Name": "Node",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
+        "Array": false,
+        "Visibility": 0
+    }],
+    "DefaultValue": {
+        "Type": { "Id": "cb6ed1e1baab4753b824be22e7d449ec", "Name": "TileIcons" }
+    }
+}]

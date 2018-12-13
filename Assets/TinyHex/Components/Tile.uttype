@@ -18,6 +18,12 @@
         "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
         "Array": false,
         "Visibility": 1
+    }, {
+        "Id": "8719e81a548c459da787c6047d61da7a",
+        "Name": "Status",
+        "FieldType": { "Id": "25bc65e01c414d4299bcbcb6588394e9", "Name": "TileStatus" },
+        "Array": false,
+        "Visibility": 0
     }],
     "DefaultValue": {
         "Type": { "Id": "3f9a8698f1184496a3515d27b7acb499", "Name": "Tile" }
