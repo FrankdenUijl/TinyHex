@@ -1,3 +1,115 @@
+var game;
+(function (game) {
+    var CoordinateUtils = /** @class */ (function () {
+        function CoordinateUtils() {
+        }
+        CoordinateUtils.GetHashCode = function (coordinate) {
+            var hash = coordinate.Column;
+            hash = (hash << 16) | coordinate.Row;
+            return hash;
+        };
+        CoordinateUtils.GetCoordinateFromHash = function (hash) {
+            var row = hash & 0xffff;
+            var column = (hash >> 16) & 0xffff;
+            return CoordinateUtils.NewCoordinate(row, column);
+        };
+        CoordinateUtils.Equals = function (coordinateA, coordinateB) {
+            return coordinateA.Row == coordinateB.Row &&
+                coordinateA.Column == coordinateB.Column;
+        };
+        CoordinateUtils.NewCoordinate = function (column, row) {
+            var coordinate = new game.Coordinate();
+            coordinate.Row = row;
+            coordinate.Column = column;
+            return coordinate;
+        };
+        CoordinateUtils.GetPosition = function (coordinate, size) {
+            var x = size * 3 / 2 * coordinate.Column;
+            var y = size * Math.sqrt(3) * (coordinate.Row + coordinate.Column / 2);
+            return new Vector3(x, 0, -y);
+        };
+        CoordinateUtils.GetNeighbors = function (coordinate) {
+            return [
+                CoordinateUtils.GetNeighbor(coordinate, 0),
+                CoordinateUtils.GetNeighbor(coordinate, 1),
+                CoordinateUtils.GetNeighbor(coordinate, 2),
+                CoordinateUtils.GetNeighbor(coordinate, 3),
+                CoordinateUtils.GetNeighbor(coordinate, 4),
+                CoordinateUtils.GetNeighbor(coordinate, 5)
+            ];
+        };
+        CoordinateUtils.IsNeighbor = function (coordinateA, coordinateB) {
+            for (var i = 0; i < CoordinateUtils.Neighbors.length; i += 1) {
+                if (coordinateB == CoordinateUtils.GetNeighbor(coordinateA, i)) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        CoordinateUtils.GetNeighbor = function (coordinate, directionIndex) {
+            return CoordinateUtils.NewCoordinate(coordinate.Column + CoordinateUtils.Neighbors[directionIndex].Column, coordinate.Row + CoordinateUtils.Neighbors[directionIndex].Row);
+        };
+        CoordinateUtils.HeuristicCostEstimate = function (coordinateA, coordinateB, size) {
+            return CoordinateUtils.GetPosition(coordinateA, size)
+                .distanceTo(CoordinateUtils.GetPosition(coordinateB, size));
+        };
+        CoordinateUtils.APathFinding = function (start, goal, open, size) {
+            var closedSet = [];
+            var openSet = [start];
+            var cameFrom = {};
+            var gScore = {};
+            gScore[CoordinateUtils.GetHashCode(start)] = 0;
+            var fScore = {};
+            fScore[CoordinateUtils.GetHashCode(start)] = CoordinateUtils.HeuristicCostEstimate(start, goal, size);
+            while (openSet.length != 0) {
+                var current = openSet.reduce(function (i1, i2) { return fScore[CoordinateUtils.GetHashCode(i1)] < fScore[CoordinateUtils.GetHashCode(i2)] ? i1 : i2; });
+                if (current == goal) {
+                    return CoordinateUtils.ReconstructPath(cameFrom, goal, start);
+                }
+                openSet.splice(openSet.indexOf(current), 1);
+                closedSet.push(current);
+                var neighbors = CoordinateUtils.GetNeighbors(current).filter(function (c) { return open.indexOf(c) != 0; });
+                for (var i = 0; i < neighbors.length; i++) {
+                    var neighbor = neighbors[i];
+                    var neighborHashCode = CoordinateUtils.GetHashCode(neighbor);
+                    if (open.indexOf(neighbor) == 0 || closedSet.indexOf(neighbor) != 0) {
+                        continue;
+                    }
+                    var tentativeGScore = gScore[CoordinateUtils.GetHashCode(current)] +
+                        CoordinateUtils.GetPosition(current, size).distanceTo(CoordinateUtils.GetPosition(neighbor, size));
+                    if (openSet.indexOf(neighbor) == 0) {
+                        openSet.push(neighbor);
+                    }
+                    else if (tentativeGScore >= fScore[neighborHashCode]) {
+                        continue;
+                    }
+                    cameFrom[neighborHashCode] = current;
+                    gScore[neighborHashCode] = tentativeGScore;
+                    fScore[neighborHashCode] = gScore[neighborHashCode] + CoordinateUtils.HeuristicCostEstimate(neighbor, goal, size);
+                }
+            }
+            return [];
+        };
+        CoordinateUtils.ReconstructPath = function (cameFrom, current, start) {
+            var totalPath = [current];
+            while (current != start) {
+                current = cameFrom[CoordinateUtils.GetHashCode(current)];
+                totalPath.push(current);
+            }
+            return totalPath.reverse();
+        };
+        CoordinateUtils.Neighbors = [
+            CoordinateUtils.NewCoordinate(1, 0),
+            CoordinateUtils.NewCoordinate(1, -1),
+            CoordinateUtils.NewCoordinate(0, -1),
+            CoordinateUtils.NewCoordinate(-1, 0),
+            CoordinateUtils.NewCoordinate(-1, 1),
+            CoordinateUtils.NewCoordinate(0, 1),
+        ];
+        return CoordinateUtils;
+    }());
+    game.CoordinateUtils = CoordinateUtils;
+})(game || (game = {}));
 var ut;
 (function (ut) {
     var EntityGroup = /** @class */ (function () {

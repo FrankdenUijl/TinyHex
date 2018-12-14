@@ -98,6 +98,7 @@ declare namespace game{
         constructor();
         Coordinates: Coordinate;
         Grid: ut.Entity;
+        Status: TileStatus;
         static readonly cid: number;
         static readonly _view: any;
         static readonly _isSharedComp: boolean;
@@ -134,7 +135,11 @@ declare namespace game{
         FlatTopped = 0,
         PointyTopped = 1,
     }
-    enum TileType {
+    enum TileStatus {
+        Normal = 0,
+        Wall = 1,
+        Path = 2,
+        Node = 3,
     }
 }
 declare namespace ut{

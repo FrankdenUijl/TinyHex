@@ -8,38 +8,39 @@
         {
             "Key": "tsconfig",
             "Description": "Time taken to read and parse the given tsconfig.json file",
-            "Duration": 85,
+            "Duration": 57,
             "Steps": 1
         },
         {
             "Key": "checksum",
             "Description": "Time taken to compute the MD5 of all inputs",
-            "Duration": 192,
+            "Duration": 165,
             "Steps": 1
         },
         {
             "Key": "compile",
             "Description": "Time taken to compile the TypeScript program",
-            "Duration": 883,
-            "Steps": 9
+            "Duration": 1055,
+            "Steps": 10
         },
         {
             "Key": "emit",
             "Description": "Time taken to generate and write the JavaScript output",
-            "Duration": 58,
+            "Duration": 174,
             "Steps": 2
         },
         {
             "Key": "metadata",
             "Description": "Time taken to reflect Tiny metadata from the compiled program",
-            "Duration": 2,
+            "Duration": 4,
             "Steps": 0
         }
     ],
     "SourceFiles": [
+        "C:/Users/Frank/Documents/PersonalGit/Assets/TinyHex/Scripts/CoordinateUtils.ts",
         "C:/Users/Frank/Documents/PersonalGit/Library/PackageCache/com.unity.tiny@0.13.2-preview/Runtime/Modules/UTiny.EntityGroup/Scripts/EntityGroup.ts",
         "C:/Users/Frank/Documents/PersonalGit/Library/PackageCache/com.unity.tiny@0.13.2-preview/Runtime/Modules/UTiny.EntityGroup/Scripts/EntityLookupCache.ts"
     ],
-    "InputHash": "bfb8de3a90ce77b657e24a3a2783f7e1",
-    "GeneratedAt": "Thu Dec 13 2018 11:32:45 GMT+0100 (W. Europe Standard Time)"
+    "InputHash": "f8f968f701f1a36f854d2e0c8429f31c",
+    "GeneratedAt": "Fri Dec 14 2018 15:46:42 GMT+0100 (W. Europe Standard Time)"
 }
