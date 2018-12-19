@@ -2,7 +2,7 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "skipLibCheck": true,
-        "outFile": "C:/Users/Frank/Documents/PersonalGit/TinyExport/TinyHex/html5/development/ScriptAssemblies/tsc-emit.js",
+        "outFile": "D:/Git-Projects/TinyHex/TinyExport/TinyHex/html5/development/ScriptAssemblies/tsc-emit.js",
         "sourceMap": true,
         "target": "ES5"
     },

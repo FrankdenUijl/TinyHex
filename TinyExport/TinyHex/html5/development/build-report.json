@@ -1,0 +1,106 @@
+﻿{
+    "Item": {
+        "Name": "Project",
+        "Size": 0,
+        "CompressedSize": 0
+    },
+    "Children": [{
+        "Item": {
+            "Name": "Runtime",
+            "Size": 0,
+            "CompressedSize": 0
+        },
+        "Children": [{
+            "Item": {
+                "Name": "TinyExport/TinyHex/html5/development/bin/runtime.js",
+                "Size": 5505205,
+                "CompressedSize": 693164
+            }
+        }]
+    }, {
+        "Item": {
+            "Name": "Assets",
+            "Size": 0,
+            "CompressedSize": 0
+        },
+        "Children": [{
+            "Item": {
+                "Name": "JavaScript",
+                "Size": 5965,
+                "CompressedSize": 0
+            }
+        }, {
+            "Item": {
+                "Name": "Assets/TinyHex/Fonts/fa-light-300 SDF.asset",
+                "Size": 0,
+                "CompressedSize": 0,
+                "Object": { "$TypeId": 10, "Guid": "91c96a6d4591be644b1e07f10108d3e6", "FileId": 11400000, "Type": 2 }
+            },
+            "Children": [{
+                "Item": {
+                    "Name": "TinyExport/Assets/fa-light-300 SDF.png",
+                    "Size": 373140,
+                    "CompressedSize": 241568,
+                    "Object": { "$TypeId": 10, "Guid": "91c96a6d4591be644b1e07f10108d3e6", "FileId": 11400000, "Type": 2 }
+                }
+            }]
+        }]
+    }, {
+        "Item": {
+            "Name": "Code",
+            "Size": 0,
+            "CompressedSize": 0
+        },
+        "Children": [{
+            "Item": {
+                "Name": "TinyExport/TinyHex/html5/development/bin/entities.js",
+                "Size": 4126,
+                "CompressedSize": 1089
+            },
+            "Children": [{
+                "Item": {
+                    "Name": "Kickoff",
+                    "Size": 1925,
+                    "CompressedSize": 659
+                }
+            }, {
+                "Item": {
+                    "Name": "Tile",
+                    "Size": 2122,
+                    "CompressedSize": 657
+                }
+            }]
+        }, {
+            "Item": {
+                "Name": "TinyExport/TinyHex/html5/development/bin/bindings.js",
+                "Size": 96348,
+                "CompressedSize": 8532
+            }
+        }, {
+            "Item": {
+                "Name": "Linked Code Files",
+                "Size": 0,
+                "CompressedSize": 0
+            },
+            "Children": [{
+                "Item": {
+                    "Name": "D:\\Git-Projects\\TinyHex\\TinyExport\\TinyHex\\html5\\development\\ScriptAssemblies\\tsc-emit.js",
+                    "Size": 14382,
+                    "CompressedSize": 3079
+                }
+            }]
+        }, {
+            "Item": {
+                "Name": "TinyExport/TinyHex/html5/development/bin/main.js",
+                "Size": 2945,
+                "CompressedSize": 898
+            }
+        }, {
+            "Item": {
+                "Name": "TinyExport/TinyHex/html5/development/bin/wsclient.js",
+                "Size": 9391,
+                "CompressedSize": 2619
+            }
+        }]
+    }]
+}

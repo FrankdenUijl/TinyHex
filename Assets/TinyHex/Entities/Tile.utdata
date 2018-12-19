@@ -1,0 +1,63 @@
+﻿[{
+    "$TypeId": 4,
+    "Id": "57246f5e51ad4a1d88d1318ff735a915",
+    "Name": "Tile",
+    "ExportFlags": 0,
+    "SerializedVersion": 0,
+    "Entities": [
+        { "$TypeId": 9, "Id": "6785b28ad3104bcd9c355cbe51908b09", "Name": "Tile" },
+        { "$TypeId": 9, "Id": "470eacfb29d94f7b98cf87c35e828513", "Name": "NormalIcon" }
+    ]
+},
+{
+    "$TypeId": 5,
+    "Id": "6785b28ad3104bcd9c355cbe51908b09",
+    "Name": "Tile",
+    "Enabled": true,
+    "Static": false,
+    "Layer": 0,
+    "Components": [{
+        "Type": { "Id": "c895dbe72eb46ecb10d589d320151758", "Name": "TransformNode" }
+    }, {
+        "Type": { "Id": "70449d66178e0d9f66795c24f0fbbdfc", "Name": "TransformLocalPosition" }
+    }, {
+        "Type": { "Id": "3f9a8698f1184496a3515d27b7acb499", "Name": "Tile" }
+    }, {
+        "Type": { "Id": "cb6ed1e1baab4753b824be22e7d449ec", "Name": "TileIcons" },
+        "Properties": {
+            "Normal": { "$TypeId": 9, "Id": "470eacfb29d94f7b98cf87c35e828513", "Name": "NormalIcon" },
+            "Wall": { "$TypeId": 9, "Id": "f86549b2b9be4e609353dba6f5880bec", "Name": "WallIcon" },
+            "Path": { "$TypeId": 9, "Id": "8663bd90d96e44ddab11106f6c60705e", "Name": "PathIcon" },
+            "Node": { "$TypeId": 9, "Id": "e5a7d49f93c542e4a47a1a879047bf6d", "Name": "NodeIcon" }
+        }
+    }]
+},
+{
+    "$TypeId": 5,
+    "Id": "470eacfb29d94f7b98cf87c35e828513",
+    "Name": "NormalIcon",
+    "Enabled": true,
+    "Static": false,
+    "Layer": 0,
+    "Components": [{
+        "Type": { "Id": "c895dbe72eb46ecb10d589d320151758", "Name": "TransformNode" },
+        "Properties": {
+            "parent": { "$TypeId": 9, "Id": "6785b28ad3104bcd9c355cbe51908b09", "Name": "Tile" }
+        }
+    }, {
+        "Type": { "Id": "70449d66178e0d9f66795c24f0fbbdfc", "Name": "TransformLocalPosition" }
+    }, {
+        "Type": { "Id": "617fd26299c944d58b61164e0c9c9353", "Name": "Text2DRenderer" },
+        "Properties": {
+            "style": { "$TypeId": 9, "Id": "470eacfb29d94f7b98cf87c35e828513", "Name": "NormalIcon" },
+            "text": ""
+        }
+    }, {
+        "Type": { "Id": "ced0260f12f72499bae7fea4e1df92b7", "Name": "Text2DStyle" }
+    }, {
+        "Type": { "Id": "0481d22c456081a992e7c7ee42da6c19", "Name": "Text2DStyleBitmapFont" },
+        "Properties": {
+            "font": { "$TypeId": 10, "Guid": "91c96a6d4591be644b1e07f10108d3e6", "FileId": 11400000, "Type": 2 }
+        }
+    }]
+}]

@@ -1,17 +1,27 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var game;
 (function (game) {
     var CoordinateUtils = /** @class */ (function () {
         function CoordinateUtils() {
         }
-        CoordinateUtils.GetHashCode = function (coordinate) {
-            var hash = coordinate.Column;
-            hash = (hash << 16) | coordinate.Row;
-            return hash;
+        CoordinateUtils.GetString = function (coordinate) {
+            return coordinate.Column.toString() + "," + coordinate.Row.toString();
         };
-        CoordinateUtils.GetCoordinateFromHash = function (hash) {
-            var row = hash & 0xffff;
-            var column = (hash >> 16) & 0xffff;
-            return CoordinateUtils.NewCoordinate(row, column);
+        CoordinateUtils.FromString = function (coordinateString) {
+            var splitted = coordinateString.split(",");
+            return CoordinateUtils.NewCoordinate(parseInt(splitted[0]), parseInt(splitted[1]));
         };
         CoordinateUtils.Equals = function (coordinateA, coordinateB) {
             return coordinateA.Row == coordinateB.Row &&
@@ -26,7 +36,20 @@ var game;
         CoordinateUtils.GetPosition = function (coordinate, size) {
             var x = size * 3 / 2 * coordinate.Column;
             var y = size * Math.sqrt(3) * (coordinate.Row + coordinate.Column / 2);
-            return new Vector3(x, 0, -y);
+            return new Vector3(x, -y, 0);
+        };
+        CoordinateUtils.Field = function (coordinate, distance) {
+            var tiles = [coordinate];
+            for (var dx = -distance; dx <= distance; dx++) {
+                for (var dy = Math.max(-distance, -dx - distance); dy <= Math.min(distance, -dx + distance); dy++) {
+                    var dz = -dx - dy;
+                    if (coordinate.Column == coordinate.Column + dx && coordinate.Row == coordinate.Row + dz) {
+                        continue;
+                    }
+                    tiles.push(CoordinateUtils.NewCoordinate(coordinate.Column + dx, coordinate.Row + dz));
+                }
+            }
+            return tiles;
         };
         CoordinateUtils.GetNeighbors = function (coordinate) {
             return [
@@ -40,7 +63,7 @@ var game;
         };
         CoordinateUtils.IsNeighbor = function (coordinateA, coordinateB) {
             for (var i = 0; i < CoordinateUtils.Neighbors.length; i += 1) {
-                if (coordinateB == CoordinateUtils.GetNeighbor(coordinateA, i)) {
+                if (CoordinateUtils.Equals(coordinateB, CoordinateUtils.GetNeighbor(coordinateA, i))) {
                     return true;
                 }
             }
@@ -54,38 +77,42 @@ var game;
                 .distanceTo(CoordinateUtils.GetPosition(coordinateB, size));
         };
         CoordinateUtils.APathFinding = function (start, goal, open, size) {
+            var startHash = CoordinateUtils.GetString(start);
+            var goalHash = CoordinateUtils.GetString(goal);
+            var openHashes = open.map(function (c) { return CoordinateUtils.GetString(c); });
             var closedSet = [];
-            var openSet = [start];
+            var openSet = [startHash];
             var cameFrom = {};
             var gScore = {};
-            gScore[CoordinateUtils.GetHashCode(start)] = 0;
+            gScore[startHash] = 0;
             var fScore = {};
-            fScore[CoordinateUtils.GetHashCode(start)] = CoordinateUtils.HeuristicCostEstimate(start, goal, size);
+            fScore[startHash] = CoordinateUtils.HeuristicCostEstimate(start, goal, size);
             while (openSet.length != 0) {
-                var current = openSet.reduce(function (i1, i2) { return fScore[CoordinateUtils.GetHashCode(i1)] < fScore[CoordinateUtils.GetHashCode(i2)] ? i1 : i2; });
-                if (current == goal) {
+                var currentHash = openSet.reduce(function (i1, i2) { return fScore[i1] < fScore[i2] ? i1 : i2; });
+                var current = CoordinateUtils.FromString(currentHash);
+                if (currentHash == goalHash) {
                     return CoordinateUtils.ReconstructPath(cameFrom, goal, start);
                 }
-                openSet.splice(openSet.indexOf(current), 1);
-                closedSet.push(current);
+                openSet.splice(openSet.indexOf(currentHash), 1);
+                closedSet.push(currentHash);
                 var neighbors = CoordinateUtils.GetNeighbors(current).filter(function (c) { return open.indexOf(c) != 0; });
                 for (var i = 0; i < neighbors.length; i++) {
                     var neighbor = neighbors[i];
-                    var neighborHashCode = CoordinateUtils.GetHashCode(neighbor);
-                    if (open.indexOf(neighbor) == 0 || closedSet.indexOf(neighbor) != 0) {
+                    var neighborHash = CoordinateUtils.GetString(neighbor);
+                    if (openHashes.indexOf(neighborHash) == 0 || closedSet.indexOf(neighborHash) != 0) {
                         continue;
                     }
-                    var tentativeGScore = gScore[CoordinateUtils.GetHashCode(current)] +
+                    var tentativeGScore = gScore[currentHash] +
                         CoordinateUtils.GetPosition(current, size).distanceTo(CoordinateUtils.GetPosition(neighbor, size));
-                    if (openSet.indexOf(neighbor) == 0) {
-                        openSet.push(neighbor);
+                    if (openSet.indexOf(neighborHash) == 0) {
+                        openSet.push(neighborHash);
                     }
-                    else if (tentativeGScore >= fScore[neighborHashCode]) {
+                    else if (tentativeGScore >= fScore[neighborHash]) {
                         continue;
                     }
-                    cameFrom[neighborHashCode] = current;
-                    gScore[neighborHashCode] = tentativeGScore;
-                    fScore[neighborHashCode] = gScore[neighborHashCode] + CoordinateUtils.HeuristicCostEstimate(neighbor, goal, size);
+                    cameFrom[neighborHash] = current;
+                    gScore[neighborHash] = tentativeGScore;
+                    fScore[neighborHash] = gScore[neighborHash] + CoordinateUtils.HeuristicCostEstimate(neighbor, goal, size);
                 }
             }
             return [];
@@ -93,7 +120,7 @@ var game;
         CoordinateUtils.ReconstructPath = function (cameFrom, current, start) {
             var totalPath = [current];
             while (current != start) {
-                current = cameFrom[CoordinateUtils.GetHashCode(current)];
+                current = cameFrom[CoordinateUtils.GetString(current)];
                 totalPath.push(current);
             }
             return totalPath.reverse();
@@ -109,6 +136,86 @@ var game;
         return CoordinateUtils;
     }());
     game.CoordinateUtils = CoordinateUtils;
+})(game || (game = {}));
+var game;
+(function (game) {
+    var TileIconSystem = /** @class */ (function (_super) {
+        __extends(TileIconSystem, _super);
+        function TileIconSystem() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        TileIconSystem.prototype.OnUpdate = function () {
+            this.world.forEach([game.Tile, game.TileIcons], function (tile, tileIcons) {
+                /*
+                let iconEntitie = tile.Status == game.TileStatus.Node ? tileIcons.Node :
+                    tile.Status == game.TileStatus.Normal ? tileIcons.Normal :
+                        tile.Status == game.TileStatus.Path ? tileIcons.Path :
+                            tileIcons.Wall;*/
+                //this.world.set
+            });
+        };
+        return TileIconSystem;
+    }(ut.ComponentSystem));
+    game.TileIconSystem = TileIconSystem;
+})(game || (game = {}));
+var game;
+(function (game) {
+    var TilePositionSystem = /** @class */ (function (_super) {
+        __extends(TilePositionSystem, _super);
+        function TilePositionSystem() {
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.speed = 10;
+            return _this;
+        }
+        TilePositionSystem.prototype.OnUpdate = function () {
+            var _this = this;
+            this.world.forEach([game.Tile, ut.Core2D.TransformLocalPosition], function (tile, localPosition) {
+                var grid = _this.world.getComponentData(tile.Grid, game.Grid);
+                var gridCoordinate = grid.Start;
+                var size = grid.Size;
+                var localCoordinate = game.CoordinateUtils.NewCoordinate(tile.Coordinates.Column - gridCoordinate.Column, tile.Coordinates.Row - gridCoordinate.Row);
+                var currentPosition = localPosition.position;
+                var gotoPosition = game.CoordinateUtils.GetPosition(localCoordinate, size);
+                //TODO: move to
+                localPosition.position = gotoPosition;
+            });
+        };
+        return TilePositionSystem;
+    }(ut.ComponentSystem));
+    game.TilePositionSystem = TilePositionSystem;
+})(game || (game = {}));
+var game;
+(function (game) {
+    var TileSpawnerSystem = /** @class */ (function (_super) {
+        __extends(TileSpawnerSystem, _super);
+        function TileSpawnerSystem() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        TileSpawnerSystem.prototype.OnUpdate = function () {
+            var _this = this;
+            this.world.forEach([ut.Entity, game.Grid], function (gridEntity, grid) {
+                if (!grid.Changed) {
+                    return;
+                }
+                var tiles = grid.Tiles.map(function (t) { return _this.world.getComponentData(t, game.Tile); });
+                var coordinatesHashes = game.CoordinateUtils.Field(grid.Start, grid.Field)
+                    .map(function (c) { return game.CoordinateUtils.GetString(c); });
+                var tilesToRemove = tiles.filter(function (t) { return coordinatesHashes.indexOf(game.CoordinateUtils.GetString(t.Coordinates)) == 0; });
+                var tilesToAdd = coordinatesHashes.filter(function (c) { return tiles.map(function (t) { return game.CoordinateUtils.GetString(t.Coordinates); }).indexOf(c) != 0; });
+                tilesToAdd.forEach(function (t) {
+                    var tile = ut.EntityGroup.instantiate(_this.world, 'game.Tile')[0];
+                    var coordinateComponent = new game.Tile();
+                    coordinateComponent.Coordinates = game.CoordinateUtils.FromString(t);
+                    coordinateComponent.Grid = gridEntity;
+                    coordinateComponent.Status = game.TileStatus.Normal;
+                    _this.world.setComponentData(tile, coordinateComponent);
+                });
+                grid.Changed = false;
+            });
+        };
+        return TileSpawnerSystem;
+    }(ut.ComponentSystem));
+    game.TileSpawnerSystem = TileSpawnerSystem;
 })(game || (game = {}));
 var ut;
 (function (ut) {

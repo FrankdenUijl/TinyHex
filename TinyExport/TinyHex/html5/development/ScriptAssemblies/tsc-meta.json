@@ -1,46 +1,80 @@
 {
     "Success": true,
     "Diagnostics": [],
-    "Systems": [],
+    "Systems": [
+        {
+            "Name": "TileIconSystem",
+            "QualifiedName": "game.TileIconSystem",
+            "Description": "",
+            "Source": {
+                "File": "D:/Git-Projects/TinyHex/Assets/TinyHex/Scripts/TileIconSystem.ts",
+                "Line": 4,
+                "Character": 17
+            }
+        },
+        {
+            "Name": "TilePositionSystem",
+            "QualifiedName": "game.TilePositionSystem",
+            "Description": "",
+            "Source": {
+                "File": "D:/Git-Projects/TinyHex/Assets/TinyHex/Scripts/TilePositionSystem.ts",
+                "Line": 4,
+                "Character": 17
+            }
+        },
+        {
+            "Name": "TileSpawnerSystem",
+            "QualifiedName": "game.TileSpawnerSystem",
+            "Description": "",
+            "Source": {
+                "File": "D:/Git-Projects/TinyHex/Assets/TinyHex/Scripts/TileSpawnerSystem.ts",
+                "Line": 4,
+                "Character": 17
+            }
+        }
+    ],
     "Filters": [],
     "Behaviours": [],
     "Performance": [
         {
             "Key": "tsconfig",
             "Description": "Time taken to read and parse the given tsconfig.json file",
-            "Duration": 57,
+            "Duration": 55,
             "Steps": 1
         },
         {
             "Key": "checksum",
             "Description": "Time taken to compute the MD5 of all inputs",
-            "Duration": 165,
+            "Duration": 129,
             "Steps": 1
         },
         {
             "Key": "compile",
             "Description": "Time taken to compile the TypeScript program",
-            "Duration": 1055,
-            "Steps": 10
+            "Duration": 550,
+            "Steps": 13
         },
         {
             "Key": "emit",
             "Description": "Time taken to generate and write the JavaScript output",
-            "Duration": 174,
+            "Duration": 63,
             "Steps": 2
         },
         {
             "Key": "metadata",
             "Description": "Time taken to reflect Tiny metadata from the compiled program",
-            "Duration": 4,
-            "Steps": 0
+            "Duration": 11,
+            "Steps": 3
         }
     ],
     "SourceFiles": [
-        "C:/Users/Frank/Documents/PersonalGit/Assets/TinyHex/Scripts/CoordinateUtils.ts",
-        "C:/Users/Frank/Documents/PersonalGit/Library/PackageCache/com.unity.tiny@0.13.2-preview/Runtime/Modules/UTiny.EntityGroup/Scripts/EntityGroup.ts",
-        "C:/Users/Frank/Documents/PersonalGit/Library/PackageCache/com.unity.tiny@0.13.2-preview/Runtime/Modules/UTiny.EntityGroup/Scripts/EntityLookupCache.ts"
+        "D:/Git-Projects/TinyHex/Assets/TinyHex/Scripts/CoordinateUtils.ts",
+        "D:/Git-Projects/TinyHex/Assets/TinyHex/Scripts/TileIconSystem.ts",
+        "D:/Git-Projects/TinyHex/Assets/TinyHex/Scripts/TilePositionSystem.ts",
+        "D:/Git-Projects/TinyHex/Assets/TinyHex/Scripts/TileSpawnerSystem.ts",
+        "D:/Git-Projects/TinyHex/Library/PackageCache/com.unity.tiny@0.13.2-preview/Runtime/Modules/UTiny.EntityGroup/Scripts/EntityGroup.ts",
+        "D:/Git-Projects/TinyHex/Library/PackageCache/com.unity.tiny@0.13.2-preview/Runtime/Modules/UTiny.EntityGroup/Scripts/EntityLookupCache.ts"
     ],
-    "InputHash": "f8f968f701f1a36f854d2e0c8429f31c",
-    "GeneratedAt": "Fri Dec 14 2018 15:46:42 GMT+0100 (W. Europe Standard Time)"
+    "InputHash": "4b7646f4970f70a3851ec781466f0f7d",
+    "GeneratedAt": "Wed Dec 19 2018 19:15:17 GMT+0100 (W. Europe Standard Time)"
 }

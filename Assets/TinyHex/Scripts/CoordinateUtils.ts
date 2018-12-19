@@ -12,18 +12,15 @@ namespace game
             CoordinateUtils.NewCoordinate(0, 1),
         ];
 
-        public static GetHashCode(coordinate: Coordinate): number
+        public static GetString(coordinate: Coordinate): string
         {
-            let hash: number = coordinate.Column;
-            hash = (hash << 16) | coordinate.Row;
-            return hash;
+            return coordinate.Column.toString() + "," + coordinate.Row.toString();
         }
 
-        public static GetCoordinateFromHash(hash: number): Coordinate
+        public static FromString(coordinateString: string): Coordinate
         {
-            let row = hash & 0xffff;
-            let column = (hash >> 16) & 0xffff;
-            return CoordinateUtils.NewCoordinate(row, column);
+            let splitted = coordinateString.split(",");
+            return CoordinateUtils.NewCoordinate(parseInt(splitted[0]), parseInt(splitted[1]));
         }
 
         public static Equals(coordinateA: Coordinate, coordinateB: Coordinate): boolean
@@ -44,7 +41,28 @@ namespace game
         {
             let x:number = size * 3 / 2 * coordinate.Column;
             let y:number = size * Math.sqrt(3) * (coordinate.Row + coordinate.Column / 2);
-            return new Vector3(x, 0, -y);
+            return new Vector3(x, -y, 0);
+        }
+
+        public static Field(coordinate: Coordinate, distance:number): Coordinate[]
+        {
+            let tiles: Coordinate[] = [coordinate];
+            for (let dx:number = -distance; dx <= distance; dx++)
+            {
+                for (let dy:number = Math.max(-distance, -dx - distance); dy <= Math.min(distance, -dx + distance); dy++)
+                {
+                    let dz: number = -dx - dy;
+
+                    if (coordinate.Column == coordinate.Column + dx && coordinate.Row == coordinate.Row + dz)
+                    {
+                        continue;
+                    }
+                    
+                    tiles.push(CoordinateUtils.NewCoordinate(coordinate.Column + dx, coordinate.Row + dz));
+                }
+            }
+
+            return tiles;
         }
 
         public static GetNeighbors(coordinate: Coordinate): Coordinate[]
@@ -63,7 +81,7 @@ namespace game
         {
             for (let i = 0; i < CoordinateUtils.Neighbors.length; i += 1)
             {
-                if (coordinateB == CoordinateUtils.GetNeighbor(coordinateA, i))
+                if (CoordinateUtils.Equals(coordinateB, CoordinateUtils.GetNeighbor(coordinateA, i)))
                 {
                     return true;
                 }
@@ -89,65 +107,71 @@ namespace game
             open: Coordinate[],
             size: number): Coordinate[]
         {
-            let closedSet: Coordinate[] = [];
-            let openSet:Coordinate[] = [ start ];
-            let cameFrom: { [key: number] : Coordinate; } = {};
+            let startHash: string = CoordinateUtils.GetString(start);
+            let goalHash: string = CoordinateUtils.GetString(goal);
+            let openHashes: string[] = open.map(c => CoordinateUtils.GetString(c));
 
-            let gScore: { [key: number] : number; } = {};
-            gScore[CoordinateUtils.GetHashCode(start)] = 0;
-            let fScore: { [key: number] : number; } = {};
-            fScore[CoordinateUtils.GetHashCode(start)] = CoordinateUtils.HeuristicCostEstimate(start, goal, size);
+            let closedSet: string[] = [];
+            let openSet: string[] = [ startHash ];
+            let cameFrom: { [key: string] : Coordinate; } = {};
+
+            let gScore: { [key: string]: number; } = {};
+            gScore[startHash] = 0;
+            let fScore: { [key: string]: number; } = {};
+            fScore[startHash] = CoordinateUtils.HeuristicCostEstimate(start, goal, size);
 
             while (openSet.length != 0) 
             {
-                let current:Coordinate = openSet.reduce((i1, i2) => fScore[CoordinateUtils.GetHashCode(i1)] < fScore[CoordinateUtils.GetHashCode(i2)] ? i1 : i2);
-                if (current == goal)
+                let currentHash: string = openSet.reduce((i1, i2) => fScore[i1] < fScore[i2] ? i1 : i2);
+                let current: Coordinate = CoordinateUtils.FromString(currentHash);
+
+                if (currentHash == goalHash)
                 {
                     return CoordinateUtils.ReconstructPath(cameFrom, goal, start);
                 }
 
-                openSet.splice(openSet.indexOf(current), 1);
-                closedSet.push(current);
+                openSet.splice(openSet.indexOf(currentHash), 1);
+                closedSet.push(currentHash);
 
                 let neighbors: Coordinate[] = CoordinateUtils.GetNeighbors(current).filter(c => open.indexOf(c) != 0);
 
                 for (let i = 0; i < neighbors.length; i++) 
                 {
-                    let neighbor = neighbors[i];
-                    let neighborHashCode = CoordinateUtils.GetHashCode(neighbor);
+                    let neighbor: Coordinate = neighbors[i];
+                    let neighborHash: string = CoordinateUtils.GetString(neighbor);
 
-                    if (open.indexOf(neighbor) == 0 || closedSet.indexOf(neighbor) != 0)
+                    if (openHashes.indexOf(neighborHash) == 0 || closedSet.indexOf(neighborHash) != 0)
                     {
                         continue;
                     }
 
-                    let tentativeGScore:number = gScore[CoordinateUtils.GetHashCode(current)] + 
+                    let tentativeGScore: number = gScore[currentHash] + 
                         CoordinateUtils.GetPosition(current, size).distanceTo(CoordinateUtils.GetPosition(neighbor, size));
 
-                    if (openSet.indexOf(neighbor) == 0)
+                    if (openSet.indexOf(neighborHash) == 0)
                     {
-                        openSet.push(neighbor);
+                        openSet.push(neighborHash);
                     }
-                    else if (tentativeGScore >= fScore[neighborHashCode])
+                    else if (tentativeGScore >= fScore[neighborHash])
                     {
                         continue;
                     }
 
-                    cameFrom[neighborHashCode] = current;
-                    gScore[neighborHashCode] = tentativeGScore;
-                    fScore[neighborHashCode] = gScore[neighborHashCode] + CoordinateUtils.HeuristicCostEstimate(neighbor, goal, size);
+                    cameFrom[neighborHash] = current;
+                    gScore[neighborHash] = tentativeGScore;
+                    fScore[neighborHash] = gScore[neighborHash] + CoordinateUtils.HeuristicCostEstimate(neighbor, goal, size);
                 }
             }
 
             return [];
         }
 
-        private static ReconstructPath(cameFrom: { [key: number] : Coordinate; }, current: Coordinate, start: Coordinate): Coordinate[]
+        private static ReconstructPath(cameFrom: { [key: string] : Coordinate; }, current: Coordinate, start: Coordinate): Coordinate[]
         {
             let totalPath: Coordinate[] = [ current ];
             while (current != start)
             {
-                current = cameFrom[CoordinateUtils.GetHashCode(current)];
+                current = cameFrom[CoordinateUtils.GetString(current)];
                 totalPath.push(current);
             }
 

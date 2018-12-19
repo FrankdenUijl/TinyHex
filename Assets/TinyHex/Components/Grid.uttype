@@ -8,13 +8,7 @@
     "TypeCode": "Component",
     "Fields": [{
         "Id": "6b105e2f781f43c09534833d7c4a7b5c",
-        "Name": "Columns",
-        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
-        "Array": false,
-        "Visibility": 0
-    }, {
-        "Id": "3daf3485d4c74e09b16ec2fdd6986659",
-        "Name": "Rows",
+        "Name": "Field",
         "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
         "Array": false,
         "Visibility": 0
@@ -33,7 +27,19 @@
     }, {
         "Id": "8ca057aeccaf4f42a96c134545adc612",
         "Name": "Start",
-        "FieldType": { "Id": "3155b86c6728444aa84d581d83e59954", "Name": "Coordiantes" },
+        "FieldType": { "Id": "3155b86c6728444aa84d581d83e59954", "Name": "Coordinate" },
+        "Array": false,
+        "Visibility": 0
+    }, {
+        "Id": "1cb13ac46ec442aa9b704877f242ee3a",
+        "Name": "Tiles",
+        "FieldType": { "Id": "5a182d9d039d4dfd8fa96132d05f9ee7", "Name": "EntityReference" },
+        "Array": true,
+        "Visibility": 1
+    }, {
+        "Id": "7d93ffdb53a64784a5f470d7436d04df",
+        "Name": "Size",
+        "FieldType": { "Id": "9633c95a0a68473682f09ed6a01194b4", "Name": "Int32" },
         "Array": false,
         "Visibility": 0
     }],
